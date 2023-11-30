@@ -48,3 +48,6 @@ pip install -r requirements.txt
 - V00.01.00:
   1. Remove GUI.
   2. Remove pydantic-settings.
+- V00.01.01
+  1. Add error handling for group id.
+  2. Add verify config for ssl.

@@ -29,7 +29,7 @@ dev_logger.addHandler(handler)
 
 load_dotenv(".env")
 
-VERSION = "V00.01.00"
+VERSION = "V00.01.01"
 
 
 if __name__ == "__main__":
