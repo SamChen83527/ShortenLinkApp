@@ -13,6 +13,7 @@ class Settings:
     API_KEY: str = os.getenv("API_KEY")
     CONNECTION: str = os.getenv("CONNECTION")
     GROUP_ID: int = int(os.getenv("GROUP_ID"))
+    VERIFY: int = int(os.getenv("VERIFY"))
 
 
 aibafu_settins = Settings()
@@ -21,6 +22,7 @@ aibafu_settins = Settings()
 class AibafuTool:
     def __init__(self, api_key: str = None, group_id: int = None) -> None:
         self.connection_url = aibafu_settins.CONNECTION
+        self.verify=aibafu_settins.VERIFY
         if api_key is None:
             self.api_key = aibafu_settins.API_KEY
         if group_id is None:
@@ -58,7 +60,7 @@ class AibafuTool:
         url = f"https://{self.connection_url}/v1/chainGroup/getChainGroup?apikey={self.api_key}"
         payload = {}
         headers = {}
-        response = requests.request("GET", url, headers=headers, data=payload)
+        response = requests.request("GET", url, headers=headers, data=payload, verify=self.verify)
         data = json.loads(response.text)
         if data["code"] == 1:
             return data["result"]
@@ -71,7 +73,7 @@ class AibafuTool:
         headers = {
             "Content-Type": "application/json",
         }
-        response = requests.request("POST", url, headers=headers, data=payload)
+        response = requests.request("POST", url, headers=headers, data=payload, verify=self.verify)
         data = json.loads(response.text)
         if data["code"] == 1:
             return data["result"]["group_id"]
@@ -90,7 +92,7 @@ class AibafuTool:
         headers = {
             "Content-Type": "application/json",
         }
-        response = requests.request("POST", url, headers=headers, data=payload)
+        response = requests.request("POST", url, headers=headers, data=payload, verify=self.verify)
         data = json.loads(response.text)
         if data["code"] == 1:
             return data["result"]
