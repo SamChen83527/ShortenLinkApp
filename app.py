@@ -29,12 +29,13 @@ dev_logger.addHandler(handler)
 
 load_dotenv(".env")
 
-VERSION = "V00.01.00"
+VERSION = "V00.01.01"
 
 
 if __name__ == "__main__":
     dev_logger.info(f"APP Version: {VERSION}")
-
+    
+    # prepare input args
     parser = argparse.ArgumentParser(description="Shorten URL APP")
     parser.add_argument("--version", "-V", action="version", version=f"{VERSION}")
     parser.add_argument("--file", "-f", type=str, help="input file path")
@@ -67,7 +68,14 @@ if __name__ == "__main__":
         api_key = args.key
     if args.gid is not None:
         group_id = args.gid
-    aibabu = AibafuTool(api_key, group_id)
+    
+    # init aibafu
+    try:
+        aibabu = AibafuTool(api_key, group_id)
+    except Exception as e:
+        dev_logger.error(f"{str(e)}")
+        sys.exit(0)
+        
     dev_logger.info(f"API_KEY: {aibabu.api_key}")
     dev_logger.info(f"GROUP_ID: {aibabu.group_id}")
     dev_logger.info(f"Input file: {file_path}")
