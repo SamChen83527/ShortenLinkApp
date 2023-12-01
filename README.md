@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 ## Build
 ```bash
-.\build.bat
+.\scipts\build.bat
 ```
 
 ## Version
