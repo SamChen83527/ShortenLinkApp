@@ -1,4 +1,5 @@
 __pycache__/*
+.vscode/*
 build/*
 dist/*
 env/*
@@ -7,3 +8,4 @@ ref/*
 *.spec
 *.xlsx
 *.zip
+.env
